@@ -4,13 +4,15 @@ const movieList = document.querySelector("#movieList");
 const message = document.querySelector("#message");
 
 const API_KEY = "2c9cebd2";
-const BASE_URL = `http://www.omdbapi.com/?i=tt3896198&apikey=${API_KEY}`;
+const BASE_URL = `https://www.omdbapi.com/?apikey=${API_KEY}`;
 
-searchButton.addEventListener("keydown", (event) => {
-    if (event.key === "Enter"){
-        handleSearch();
-    }
-})
+searchButton.addEventListener("click", handleSearch);
+
+searchInput.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    handleSearch();
+  }
+});
 
 async function handleSearch() {
     const keyword = searchInput.value.trim();
@@ -24,10 +26,10 @@ async function handleSearch() {
     message.textContent = "검색 중입니다...";
     movieList.innerHTML = "";
 
-    await fetchMovies(ketword);
+    await fetchMovies(keyword);
 }
 
-async function fetchMovies(ketword) {
+async function fetchMovies(keyword) {
     try {
         const response = await fetch(`${BASE_URL}&s=${encodeURIComponent(keyword)}`);
         const data = await response.json();
@@ -69,7 +71,9 @@ async function fetchMovies(ketword) {
 function renderMovies(movies) {
     movieList.innerHTML = "";
 
-    movies.ForEach((movie) => {
+    movies.forEach((movie) => {
+        console.log(movie.Title, movie.Poster);
+
         const poster = 
             movie.Poster && movie.Poster !== "N/A"
                 ? movie.Poster

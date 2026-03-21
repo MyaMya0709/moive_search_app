@@ -9,9 +9,9 @@ const BASE_URL = `https://www.omdbapi.com/?apikey=${API_KEY}`;
 searchButton.addEventListener("click", handleSearch);
 
 searchInput.addEventListener("keydown", (event) => {
-  if (event.key === "Enter") {
-    handleSearch();
-  }
+    if (event.key === "Enter") {
+        handleSearch();
+    }
 });
 
 async function handleSearch() {
@@ -80,7 +80,11 @@ function renderMovies(movies) {
                 : "https://placehold.co/300x450?text=No+Image"
         const movieCard = `
             <article class="movie-card">
-                <img class="movie-poster" src="${poster}" alt="${movie.Title} 포스터" />
+                <img class="movie-poster"
+                    src="${poster}"
+                    alt="${movie.Title} 포스터"
+                    onerror="this.src='https://placehold.co/300x450?text=No+Image'"
+                />
                 <h3>${movie.Title}</h3>
                 <p>개봉년도: ${movie.Year}</p>
                 <p>타입: ${movie.Type}</p>

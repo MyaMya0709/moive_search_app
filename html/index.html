@@ -1,50 +1,61 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>영화 검색 앱</title>
-        <link rel="stylesheet" href="../css/style.css">
-    </head>
-    <body>
-        <header class="header">
-            <h1>영화 검색</h1>
-            <p>영화 제목을 검색해 결과를 확인해보세요.</p>
-        </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>영화 검색 앱</title>
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
-        <main class="container">
-            <section class="search-section">
-                <input
-                 type="text"
-                 id="searchInput"
-                 placeholder="예: Avengers"
-                 autocomplete="off"
-                />
-                <button id="searchButton">검색</button>
-            </section>
+  <body>
+    <header class="header">
+      <h1>영화 검색</h1>
+      <p>영화 제목을 검색해 결과를 확인해보세요.</p>
+    </header>
 
-            <section class="status-section">
-                <p id="message">영화 제목을 입력하고 검색해보세요.</p>
-            </section>
+    <main class="container">
+      <section class="search-section">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="예: Avengers"
+          autocomplete="off"
+        />
+        <button id="searchButton">검색</button>
+      </section>
 
-            <section id="movieList" class="movie-list"></section>
-        </main>
-
-            <!-- 상세 모달 -->
-        <div id="movieModal" class="modal hidden">
-            <div class="modal-overlay"></div>
-
-            <div class="modal-content">
-                <button id="closeModalButton" class="close-button" type="button">
-                ×
-                </button>
-
-                <div id="modalBody" class="modal-body">
-                <!-- JS로 상세 정보가 들어갑니다 -->
-                </div>
-            </div>
+      <section class="recent-section">
+        <div class="recent-header">
+          <h2>최근 검색어</h2>
+          <button id="clearRecentButton" type="button" class="clear-button">
+            전체 삭제
+          </button>
         </div>
+        <div id="recentKeywords" class="recent-keywords"></div>
+      </section>
 
-        <script src="../js/script.js"></script>
-    </body>
+      <section class="status-section">
+        <p id="message">영화 제목을 입력하고 검색해보세요.</p>
+      </section>
+
+      <section id="movieList" class="movie-list"></section>
+    </main>
+
+    <!-- 상세 모달 -->
+    <div id="movieModal" class="modal hidden">
+      <div class="modal-overlay"></div>
+
+      <div class="modal-content">
+        <button id="closeModalButton" class="close-button" type="button">
+          ×
+        </button>
+
+        <div id="modalBody" class="modal-body">
+          <!-- JS로 상세 정보가 들어갑니다 -->
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+  </body>
 </html>

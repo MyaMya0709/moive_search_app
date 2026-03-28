@@ -275,13 +275,37 @@ body.modal-open {
 }
 
 .keyword-chip {
-  border: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px 4px 12px;
   border-radius: 999px;
-  padding: 8px 12px;
   background-color: #e8eefc;
+}
+
+.keyword-text {
+  border: none;
+  background: transparent;
   color: #1f3c88;
   cursor: pointer;
   font-size: 14px;
+  padding: 4px 0;
+}
+
+.keyword-remove {
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  background-color: #d7e3ff;
+  color: #1f3c88;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.keyword-remove:hover {
+  background-color: #c4d7ff;
 }
 
 .empty-recent {
@@ -328,4 +352,96 @@ body.modal-open {
   to {
     transform: rotate(360deg);
   }
+}
+.bottom-info-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.96);
+  border-top: 1px solid #e5e7eb;
+  z-index: 1000;
+}
+
+.bottom-info-bar__text {
+  font-size: 13px;
+  color: #666;
+}
+
+.bottom-info-bar__btn {
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.bottom-info-bar__btn:hover {
+  background: #f3f4f6;
+}
+
+.about-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 9999;
+}
+
+.about-modal.is-open {
+  display: flex;
+}
+
+.about-modal__panel {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 24px;
+  border-radius: 16px;
+  background: #fff;
+  color: #111;
+}
+
+.about-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.about-modal__section {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.about-modal__logo {
+  display: block;
+  width: 110px;
+  height: auto;
+  margin: 12px 0;
+}
+
+.about-modal__notice {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.about-modal__link {
+  display: inline-block;
+  margin-top: 8px;
 }

@@ -48,12 +48,23 @@ document.addEventListener("keydown", (event) => {
 });
 
 recentKeywords.addEventListener("click", (event) => {
-  const chip = event.target.closest(".keyword-chip");
-  if (!chip) return;
+  const removeButton = event.target.closest(".keyword-remove");
 
-  const keyword = chip.dataset.keyword;
-  searchInput.value = keyword;
-  handleSearch();
+  if (removeButton) {
+    const keyword = removeButton.dataset.keyword;
+    removeRecentKeyword(keyword);
+    return;
+  }
+
+  const textButton = event.target.closest(".keyword-text");
+
+  if (textButton) {
+    const chip = event.target.closest(".keyword-chip");
+    const keyword = chip.dataset.keyword;
+    searchInput.value = keyword;
+    handleSearch();
+    return;
+  }
 });
 
 clearRecentButton.addEventListener("click", () => {
@@ -288,16 +299,63 @@ function renderRecentKeywords() {
   recentKeywords.innerHTML = recentList
     .map(
       (keyword) => `
-        <button
-          type="button"
-          class="keyword-chip"
-          data-keyword="${keyword}"
-        >
-          ${keyword}
-        </button>
+				<div class="keyword-chip" data-keyword="${keyword}">
+					<button type="button" class="keyword-text">
+						${keyword}
+					</button>
+					<button
+						type="button"
+						class="keyword-remove"
+						data-keyword="${keyword}"
+						aria-label="${keyword} 삭제"
+					>
+						×
+					</button>
+				</div>
       `,
     )
     .join("");
 }
 
+function removeRecentKeyword(keywordToRemove) {
+  const recentList = getRecentKeywords();
+
+  const filtered = recentList.filter(
+    (keyword) => keyword.toLowerCase() !== keywordToRemove.toLowerCase(),
+  );
+
+  localStorage.setItem(RECENT_SEARCH_KEY, JSON.stringify(filtered));
+  renderRecentKeywords();
+}
+
 renderRecentKeywords();
+
+const aboutBtn = document.getElementById("aboutBtn");
+const aboutModal = document.getElementById("aboutModal");
+const aboutCloseBtn = document.getElementById("aboutCloseBtn");
+
+function closeAboutModal() {
+  aboutModal.classList.remove("is-open");
+  aboutModal.setAttribute("aria-hidden", "true");
+  document.body.style.overflow = "";
+}
+
+if (aboutBtn && aboutModal && aboutCloseBtn) {
+  aboutBtn.addEventListener("click", () => {
+    aboutModal.classList.add("is-open");
+    aboutModal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden";
+  });
+
+  aboutCloseBtn.addEventListener("click", closeAboutModal);
+
+  aboutModal.addEventListener("click", (e) => {
+    if (e.target === aboutModal) closeAboutModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && aboutModal.classList.contains("is-open")) {
+      closeAboutModal();
+    }
+  });
+}
